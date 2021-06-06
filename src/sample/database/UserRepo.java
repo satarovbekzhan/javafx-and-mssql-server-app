@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserDB {
+public class UserRepo {
     private final DB db;
 
-    public UserDB(DB db) {
+    public UserRepo(DB db) {
         this.db = db;
     }
 
@@ -37,9 +37,9 @@ public class UserDB {
                 switch (result.getString("role")) {
                     case "ADMIN": role = Role.ADMIN;
                     break;
-                    case "RECEPTIONIST": role = Role.RECEPTIONIST;
+                    case "STAFF": role = Role.STAFF;
                     break;
-                    case "CUSTOMER": role = Role.CUSTOMER;
+                    case "BUYER": role = Role.BUYER;
                 }
 
                 list.add(new User(id, firstname, lastname, email, password, role));

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginViewController">
+<VBox maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.LoginViewController">
    <children>
        <Text fx:id="infoText" wrappingWidth="219.96484375" />
       <TextField fx:id="emailTextField" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" promptText="E-Mail" />
