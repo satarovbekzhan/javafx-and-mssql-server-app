@@ -21,7 +21,7 @@
                   </HBox>
                </children>
             </VBox>
-            <Pane prefHeight="200.0" prefWidth="460.0">
+            <Pane fx:id="productDetailsPane" prefHeight="200.0" prefWidth="460.0">
                <children>
                   <ScrollPane prefHeight="360.0" prefWidth="460.0">
                      <padding>
@@ -43,7 +43,16 @@
                               <VBox fx:id="nutrientsVBox" maxWidth="-Infinity" prefHeight="0.0" prefWidth="426.0" spacing="5.0">
 <!--                                 <HBox></HBox>-->
                               </VBox>
-                              <Text fx:id="ingredientsText" text="Product Ingredients" wrappingWidth="426.0" />
+                              <HBox prefHeight="100.0" prefWidth="426.0" spacing="10.0">
+                                 <children>
+                                    <Text fx:id="ingredientsText" text="Product Ingredients" wrappingWidth="286.0" />
+                                    <VBox prefHeight="100.0" prefWidth="130.0" spacing="10.0">
+                                       <children>
+                                          <Spinner fx:id="orderAmountSpinner" />
+                                          <Button mnemonicParsing="false" onAction="#addProductToCart" prefHeight="25.0" prefWidth="153.0" text="in den Warenkorb" />
+                                       </children></VBox>
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                      </content>

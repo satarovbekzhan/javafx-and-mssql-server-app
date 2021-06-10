@@ -5,25 +5,27 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import sample.database.DB;
 import sample.model.Category;
-import sample.model.Composition;
 import sample.model.Product;
 import sample.view.Controller;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class BuyerViewController extends Controller {
     @FXML private ListView<Object> elementsListView;
+    @FXML private Pane productDetailsPane;
 
     @FXML private Text titleText;
     @FXML private ImageView productImageView;
@@ -31,15 +33,20 @@ public class BuyerViewController extends Controller {
     @FXML private Text ingredientsText;
     @FXML private VBox nutrientsVBox;
 
+    @FXML private Spinner<Integer> orderAmountSpinner;
+
     private ArrayList<Category> categories;
     private HashMap<Integer, List<Product>> productsByCategory;
     private Product selectedProduct;
     private final ObservableList<Object> listItems = FXCollections.observableArrayList();
+    private HashMap<Integer, Integer> orderItems;
 
     @FXML
     private void initialize() {
+        productDetailsPane.setVisible(false);
         categories = new ArrayList<>();
         productsByCategory = new HashMap<>();
+        orderItems = new HashMap<>();
         elementsListView.setItems(listItems);
         elementsListView.setCellFactory(param -> new ListCell<>() {
             @Override
@@ -65,6 +72,7 @@ public class BuyerViewController extends Controller {
                 }
             }
         });
+        orderAmountSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 1));
         disOrEnableElementsListView();
         fetchCategoriesAndSetToList();
     }
@@ -85,8 +93,8 @@ public class BuyerViewController extends Controller {
             selectedProduct = null;
             listItems.clear();
             listItems.addAll(categories);
-            disOrEnableElementsListView();
         } else {
+            productDetailsPane.setVisible(true);
             selectedProduct = product;
             // show product details
             nutrientsVBox.getChildren().clear();
@@ -102,8 +110,8 @@ public class BuyerViewController extends Controller {
             if (description.length() > 365) descriptionText.setText(description.substring(0, 365) + "...");
             else descriptionText.setText(description);
             ingredientsText.setText(selectedProduct.getIngredients());
-            disOrEnableElementsListView();
         }
+        disOrEnableElementsListView();
     }
 
     private void inflateProductNutrients(Integer productId) {
@@ -161,6 +169,15 @@ public class BuyerViewController extends Controller {
 
     private void disOrEnableElementsListView() {
         this.elementsListView.setDisable(!this.elementsListView.isDisabled());
+    }
+
+    @FXML
+    public void addProductToCart() {
+        Integer productId = selectedProduct.getId();
+        Integer amount = orderAmountSpinner.getValue();
+        if (orderItems.containsKey(productId)) orderItems.put(productId, orderItems.get(productId) + amount);
+        else orderItems.put(productId, amount);
+        System.out.println(productId + " " + amount);
     }
 
     @FXML
