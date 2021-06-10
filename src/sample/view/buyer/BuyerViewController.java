@@ -2,61 +2,114 @@ package sample.view.buyer;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.stage.WindowEvent;
 import sample.database.DB;
 import sample.model.Category;
+import sample.model.Product;
 import sample.view.Controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class BuyerViewController extends Controller {
-    @FXML private ListView<Category> categoryListView;
-
-    private final ObservableList<Category> categories = FXCollections.observableArrayList();
+    @FXML
+    private ListView<Object> elementsListView;
+    private ArrayList<Category> categories;
+    private HashMap<Integer, List<Product>> productsByCategory;
+    private Product selectedProduct;
+    private final ObservableList<Object> listItems = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
-        categoryListView.setItems(categories);
-        categoryListView.setCellFactory(param -> new ListCell<>() {
+        categories = new ArrayList<>();
+        productsByCategory = new HashMap<>();
+        elementsListView.setItems(listItems);
+        elementsListView.setCellFactory(param -> new ListCell<>() {
             @Override
-            protected void updateItem(Category category, boolean empty) {
-                super.updateItem(category, empty);
-                if (empty || category == null) {
-                    setText(null);
-                } else {
-                    setText(category.getName());
+            protected void updateItem(Object element, boolean empty) {
+                super.updateItem(element, empty);
+                if (empty || element == null) setText(null);
+                else {
+                    if (element instanceof Category) setText(((Category) element).getName());
+                    else {
+                        if (((Product) element).getId() == -1) setText("<<<");
+                        else setText(((Product) element).getTitle());
+                    }
                 }
             }
         });
-
-        afterInitialized();
-    }
-
-    private void afterInitialized() {
-        loadCategories();
-    }
-
-    private void loadCategories() {
-        Task<Boolean> task = new Task<>() {
-            @Override
-            public Boolean call() {
-                AtomicBoolean noError = new AtomicBoolean(true);
-                Optional<List<Category>> optionalList = DB.categoryRepo.getAllCategories();
-                optionalList.ifPresentOrElse(categories::addAll, () -> noError.set(false));
-                return noError.get();
+        elementsListView.setOnMouseClicked(event -> {
+            Object o = elementsListView.getSelectionModel().getSelectedItem();
+            if (o != null) {
+                if (o instanceof Category) {
+                    changeElementsListViewToProducts(((Category) o).getId());
+                } else {
+                    handleOnProductClicked(((Product) o));
+                }
             }
-        };
-//        task.setOnSucceeded(e -> {
-//            if (task.getValue()) {
-//
-//            }
-//        });
-        new Thread(task).start();
+        });
+        disOrEnableElementsListView();
+        fetchCategoriesAndSetToList();
+    }
+
+    private void fetchCategoriesAndSetToList() {
+        DB.categoryRepo.getAllCategories(result -> {
+            categories.addAll(result);
+            listItems.clear();
+            listItems.addAll(categories);
+            disOrEnableElementsListView();
+        }, System.out::println);
+    }
+
+    private void handleOnProductClicked(Product product) {
+        if (product == selectedProduct) return;
+        disOrEnableElementsListView();
+        if (product.getId() == -1) {
+            selectedProduct = null;
+            listItems.clear();
+            listItems.addAll(categories);
+            disOrEnableElementsListView();
+        } else {
+            selectedProduct = product;
+            System.out.println(product.getTitle());
+            disOrEnableElementsListView();
+        }
+
+    }
+
+    private void changeElementsListViewToProducts(Integer categoryId) {
+        disOrEnableElementsListView();
+        listItems.clear();
+        listItems.add(new Product(-1, "", "", "", ""));
+        if (productsByCategory.containsKey(categoryId)) {
+            listItems.addAll(productsByCategory.get(categoryId));
+            disOrEnableElementsListView();
+        } else {
+            DB.productRepo.getProductsByCategoryId(categoryId, result -> {
+                productsByCategory.put(categoryId, result);
+                listItems.addAll(productsByCategory.get(categoryId));
+                disOrEnableElementsListView();
+            }, error -> {
+                System.out.println(error);
+                disOrEnableElementsListView();
+            });
+        }
+    }
+
+    private void disOrEnableElementsListView() {
+        this.elementsListView.setDisable(!this.elementsListView.isDisabled());
+    }
+
+    @FXML
+    public void goToCart() {
+        DB.testRepo.getLoginData(System.out::println, System.out::println);
+    }
+
+    @FXML
+    public void goToPayment() {
+        DB.testRepo.getLoginData(System.out::println, System.out::println);
     }
 }

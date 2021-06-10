@@ -35,7 +35,10 @@ public class LoginViewController {
         roleChoiceBox.getItems().add(Role.ADMIN);
         roleChoiceBox.getItems().add(Role.STAFF);
         roleChoiceBox.getItems().add(Role.BUYER);
-        roleChoiceBox.setValue(Role.ADMIN);
+        roleChoiceBox.setValue(Role.BUYER);
+
+        emailTextField.setText("makk_user");
+        passwordTextField.setText("123");
 
         info("Authorization required! Choose a ROLE and give your credentials to get an access.", null);
     }
@@ -122,6 +125,7 @@ public class LoginViewController {
             this.app.show();
         } catch (IOException e) {
             info(e.getMessage(), Color.RED);
+            e.printStackTrace();
         }
     }
 

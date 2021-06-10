@@ -9,11 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserRepo {
-    private final DB db;
+public class UserRepo extends Repository{
 
     public UserRepo(DB db) {
-        this.db = db;
+        super(db);
     }
 
     public Optional<List<User>> getAllUsers() {
@@ -26,7 +25,7 @@ public class UserRepo {
                 "      ,[role]\n" +
                 "  FROM [makk].[dbo].[user]";
         try {
-            ResultSet result = db.query(query);
+            ResultSet result = query(query);
             while (result.next()) {
                 Integer id = result.getInt("id");
                 String firstname = result.getString("firstname");

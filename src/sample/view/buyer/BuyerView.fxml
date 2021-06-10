@@ -3,8 +3,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="622.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.buyer.BuyerViewController">
+<AnchorPane prefHeight="380.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.buyer.BuyerViewController">
    <children>
-      <ListView fx:id="categoryListView" prefHeight="622.0" prefWidth="427.0" />
+      <HBox prefHeight="380.0" prefWidth="690.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="230.0" spacing="10.0">
+               <children>
+                  <ListView fx:id="elementsListView" prefHeight="370.0" prefWidth="230.0" />
+                  <HBox prefHeight="16.0" prefWidth="230.0" spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#goToCart" prefWidth="110.0" text="Warenkorb" />
+                        <Button mnemonicParsing="false" onAction="#goToPayment" prefWidth="110.0" text="Kaufen" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Pane prefHeight="200.0" prefWidth="460.0" />
+         </children></HBox>
    </children>
 </AnchorPane>
