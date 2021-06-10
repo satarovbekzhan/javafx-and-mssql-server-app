@@ -5,18 +5,24 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import sample.database.DB;
 import sample.model.Category;
 import sample.model.Product;
 import sample.view.Controller;
 
+import java.io.File;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class BuyerViewController extends Controller {
-    @FXML
-    private ListView<Object> elementsListView;
+    @FXML private ListView<Object> elementsListView;
+    @FXML private ImageView productImageView;
+
     private ArrayList<Category> categories;
     private HashMap<Integer, List<Product>> productsByCategory;
     private Product selectedProduct;
@@ -74,10 +80,16 @@ public class BuyerViewController extends Controller {
             disOrEnableElementsListView();
         } else {
             selectedProduct = product;
+            // show product details
+            try {
+                Image img = new Image(selectedProduct.getPicture());
+                productImageView.setImage(img);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getCause().getMessage());
+            }
             System.out.println(product.getTitle());
             disOrEnableElementsListView();
         }
-
     }
 
     private void changeElementsListViewToProducts(Integer categoryId) {
