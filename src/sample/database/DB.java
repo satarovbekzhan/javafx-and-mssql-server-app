@@ -9,6 +9,7 @@ public class DB {
     public static UserRepo userRepo;
     public static CategoryRepo categoryRepo;
     public static ProductRepo productRepo;
+    public static CompositionRepo compositionRepo;
 
     private final String url;
 
@@ -28,5 +29,6 @@ public class DB {
         categoryRepo = new CategoryRepo(db);
         testRepo = new TestRepo(db);
         productRepo = new ProductRepo(db);
+        compositionRepo = new CompositionRepo(db);
     }
 }

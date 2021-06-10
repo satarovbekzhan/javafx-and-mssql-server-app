@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="380.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.buyer.BuyerViewController">
    <children>
@@ -23,12 +24,29 @@
             <Pane prefHeight="200.0" prefWidth="460.0">
                <children>
                   <ScrollPane prefHeight="360.0" prefWidth="460.0">
-                     <content>
-                        <ImageView fx:id="productImageView" fitHeight="140.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
-                     </content>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
+                     <content>
+                        <VBox maxWidth="-Infinity" prefHeight="339.0" prefWidth="426.0" spacing="20.0">
+                           <children>
+                              <Text fx:id="titleText" style="-fx-font-size: 18;" text="Hamburger Title Name" wrappingWidth="426.0" />
+                              <HBox prefHeight="100.0" prefWidth="426.0" spacing="10.0">
+                                 <children>
+                                    <ImageView fx:id="productImageView" fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@burger.jpg" />
+                                       </image></ImageView>
+                                    <Text fx:id="descriptionText" text="Minced and reformed beef in a vaguely disc-shaped slab, cooked, and placed inside a bread roll, possibly along with various vegetables and sauces. Usually the meat is sourced from cheap offcuts and has a higher than average fat content. That being said, there is something distinctly refreshing about biting into a great greasy burger once every so often." wrappingWidth="286.0" />
+                                 </children>
+                              </HBox>
+                              <VBox fx:id="nutrientsVBox" maxWidth="-Infinity" prefHeight="0.0" prefWidth="426.0" spacing="5.0">
+<!--                                 <HBox></HBox>-->
+                              </VBox>
+                              <Text fx:id="ingredientsText" text="Product Ingredients" wrappingWidth="426.0" />
+                           </children>
+                        </VBox>
+                     </content>
                   </ScrollPane>
                </children></Pane>
          </children></HBox>
