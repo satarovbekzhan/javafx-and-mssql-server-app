@@ -4,24 +4,26 @@ import sample.database.lamda.OnError;
 import sample.database.lamda.OnSucceed;
 import sample.model.Category;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryRepo extends Repository {
+public class CategoryRepo extends DB {
 
-    public CategoryRepo(DB db) {
-        super(db);
+    public CategoryRepo(String url) {
+        super(url);
     }
 
     public void getAllCategories(OnSucceed<List<Category>> onSucceed, OnError onError) {
         List<Category> list = new ArrayList<>();
-        String query = "SELECT [id]\n" +
+        String sql = "SELECT [id]\n" +
                 "      ,[name]\n" +
                 "  FROM [makk].[dbo].[category]";
         try {
-            ResultSet result = query(query);
+            PreparedStatement stm = getConnection().prepareStatement(sql);
+            ResultSet result = stm.executeQuery();
             while (result.next()) {
                 Integer id = result.getInt("id");
                 String name = result.getString("name");

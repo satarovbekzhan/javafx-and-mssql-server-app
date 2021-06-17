@@ -1,23 +1,25 @@
 package sample.database;
 
+import sample.database.lamda.OnError;
+import sample.database.lamda.OnSucceed;
 import sample.model.Role;
 import sample.model.User;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public class UserRepo extends Repository{
+public class UserRepo extends DB {
 
-    public UserRepo(DB db) {
-        super(db);
+    public UserRepo(String url) {
+        super(url);
     }
 
-    public Optional<List<User>> getAllUsers() {
+    public void getAllUsers(OnSucceed<List<User>> onSucceed, OnError onError) {
         List<User> list = new ArrayList<>();
-        String query = "SELECT TOP (1000) [id]\n" +
+        String sql = "SELECT TOP (1000) [id]\n" +
                 "      ,[firstname]\n" +
                 "      ,[lastname]\n" +
                 "      ,[email]\n" +
@@ -25,7 +27,8 @@ public class UserRepo extends Repository{
                 "      ,[role]\n" +
                 "  FROM [makk].[dbo].[user]";
         try {
-            ResultSet result = query(query);
+            PreparedStatement stm = getConnection().prepareStatement(sql);
+            ResultSet result = stm.executeQuery();
             while (result.next()) {
                 Integer id = result.getInt("id");
                 String firstname = result.getString("firstname");
@@ -40,12 +43,11 @@ public class UserRepo extends Repository{
                     break;
                     case "BUYER": role = Role.BUYER;
                 }
-
                 list.add(new User(id, firstname, lastname, email, password, role));
             }
         } catch (SQLException e) {
-            return Optional.empty();
+            onError.operate(e.getMessage());
         }
-        return Optional.of(list);
+        onSucceed.operate(list);
     }
 }

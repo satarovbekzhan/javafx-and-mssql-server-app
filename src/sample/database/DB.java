@@ -4,7 +4,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 import java.sql.*;
 
-public class DB {
+public abstract class DB {
     public static TestRepo testRepo;
     public static UserRepo userRepo;
     public static CategoryRepo categoryRepo;
@@ -13,22 +13,34 @@ public class DB {
 
     private final String url;
 
-    public DB(String host, String port, String username, String password, String database) throws SQLException {
-        url = "jdbc:sqlserver://" + host + ":" + port + ";databaseName=" + database + ";user=" + username + ";password=" + password + ";";
+    protected DB(String url) {
+        this.url = url;
     }
 
-    public Connection getConnection() throws SQLException {
+    protected Connection getConnection() throws SQLException {
         DriverManager.registerDriver(new SQLServerDriver());
-        return DriverManager.getConnection(url);
+        return DriverManager.getConnection(this.url);
     }
 
     public static void initializeDatabaseModels(String username, String password) throws SQLException {
-        DB db = new DB("127.0.0.1", "1433", username, password, "makk");
-        db.getConnection();
-        userRepo = new UserRepo(db);
-        categoryRepo = new CategoryRepo(db);
-        testRepo = new TestRepo(db);
-        productRepo = new ProductRepo(db);
-        compositionRepo = new CompositionRepo(db);
+        // Create connection url from given username and password
+        String host = "127.0.0.1";
+        String port = "1433";
+        String database = "makk";
+        String connUrl = "jdbc:sqlserver://" + host + ":" + port +
+                ";databaseName=" + database + ";user=" + username + ";password=" + password + ";";
+
+        // Create an instance of a DB and try to get connection
+//        DB db = new DB(connUrl);
+//        db.getConnection();
+
+        testRepo = new TestRepo(connUrl);
+        System.out.println("LOGGED IN AS: " + testRepo.getLoginData());
+
+        // Instantiate other database repositories
+        userRepo = new UserRepo(connUrl);
+        categoryRepo = new CategoryRepo(connUrl);
+        productRepo = new ProductRepo(connUrl);
+        compositionRepo = new CompositionRepo(connUrl);
     }
 }

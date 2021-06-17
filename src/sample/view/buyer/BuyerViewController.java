@@ -3,10 +3,7 @@ package sample.view.buyer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -33,7 +30,7 @@ public class BuyerViewController extends Controller {
     @FXML private Text ingredientsText;
     @FXML private VBox nutrientsVBox;
 
-    @FXML private Spinner<Integer> orderAmountSpinner;
+    @FXML private TextField orderAmountField;
 
     private ArrayList<Category> categories;
     private HashMap<Integer, List<Product>> productsByCategory;
@@ -43,6 +40,7 @@ public class BuyerViewController extends Controller {
 
     @FXML
     private void initialize() {
+        orderAmountField.setText("0");
         productDetailsPane.setVisible(false);
         categories = new ArrayList<>();
         productsByCategory = new HashMap<>();
@@ -72,7 +70,6 @@ public class BuyerViewController extends Controller {
                 }
             }
         });
-        orderAmountSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 1));
         disOrEnableElementsListView();
         fetchCategoriesAndSetToList();
     }
@@ -110,6 +107,7 @@ public class BuyerViewController extends Controller {
             if (description.length() > 365) descriptionText.setText(description.substring(0, 365) + "...");
             else descriptionText.setText(description);
             ingredientsText.setText(selectedProduct.getIngredients());
+            updateOrderAmountValueField();
         }
         disOrEnableElementsListView();
     }
@@ -126,15 +124,15 @@ public class BuyerViewController extends Controller {
 
     private void addRowToNutrients(String nutrient, String pro_100, String pro_por) {
         Text nutrientText = new Text();
-        nutrientText.setWrappingWidth(226);
+        nutrientText.setWrappingWidth(206);
         nutrientText.setText(nutrient);
         Text pro_100Text = new Text();
-        pro_100Text.setWrappingWidth(100);
+        pro_100Text.setWrappingWidth(110);
         pro_100Text.setTextAlignment(TextAlignment.CENTER);
         pro_100Text.setText(pro_100);
         Text pro_porText = new Text();
         pro_porText.setTextAlignment(TextAlignment.CENTER);
-        pro_porText.setWrappingWidth(100);
+        pro_porText.setWrappingWidth(110);
         pro_porText.setText(pro_por);
         if (nutrient.equals("Nährstoffname")) {
             nutrientText.setStyle("-fx-font-weight: bold");
@@ -173,20 +171,46 @@ public class BuyerViewController extends Controller {
 
     @FXML
     public void addProductToCart() {
+        if (selectedProduct == null) return;
         Integer productId = selectedProduct.getId();
-        Integer amount = orderAmountSpinner.getValue();
-        if (orderItems.containsKey(productId)) orderItems.put(productId, orderItems.get(productId) + amount);
-        else orderItems.put(productId, amount);
-        System.out.println(productId + " " + amount);
+        if (orderItems.containsKey(productId)) {
+            if (orderItems.get(productId) < 100) {
+                orderItems.put(productId, orderItems.get(productId) + 1);
+                updateOrderAmountValueField();
+            }
+        } else {
+            orderItems.put(productId, 1);
+            updateOrderAmountValueField();
+        }
+    }
+
+    @FXML
+    public void removeProductFromCart() {
+        if (selectedProduct == null) return;
+        Integer productId = selectedProduct.getId();
+        if (orderItems.containsKey(productId)) {
+            if (orderItems.get(productId) != 0) {
+                orderItems.put(productId, orderItems.get(productId) - 1);
+                updateOrderAmountValueField();
+            }
+        }
+    }
+
+    private void updateOrderAmountValueField() {
+        if (selectedProduct != null) {
+            if (orderItems.containsKey(selectedProduct.getId()))
+                orderAmountField.setText(String.valueOf(orderItems.get(selectedProduct.getId())));
+            else orderAmountField.setText("0");
+        }
     }
 
     @FXML
     public void goToCart() {
-        DB.testRepo.getLoginData(System.out::println, System.out::println);
+        //
     }
 
     @FXML
     public void goToPayment() {
-        DB.testRepo.getLoginData(System.out::println, System.out::println);
+        //
     }
 }
