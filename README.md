@@ -7,3 +7,5 @@
 > all orders. System uses JavaFX as a GUI and MS 
 > SQL Server as a database and developed only as
 > a simulation of business process.
+
+[<img src="makk.png" width="100%" alt="Pizzeria Database Diagram"/>](makk.png)

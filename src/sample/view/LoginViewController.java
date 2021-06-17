@@ -35,7 +35,7 @@ public class LoginViewController {
         roleChoiceBox.getItems().add(Role.ADMIN);
         roleChoiceBox.getItems().add(Role.STAFF);
         roleChoiceBox.getItems().add(Role.BUYER);
-        roleChoiceBox.setValue(Role.BUYER);
+        roleChoiceBox.setValue(Role.ADMIN);
 
         emailTextField.setText("makk_user");
         passwordTextField.setText("123");

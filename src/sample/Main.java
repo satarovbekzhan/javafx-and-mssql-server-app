@@ -7,14 +7,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.view.LoginViewController;
 
-import java.util.Objects;
-
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Application.setUserAgentStylesheet(Objects.requireNonNull(getClass().getResource("main.css")).toExternalForm());
-
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("view/LoginView.fxml"));
         Parent root = loader.load();

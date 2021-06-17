@@ -1,5 +1,6 @@
 package sample.view.buyer;
 
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import sample.view.Controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class BuyerViewController extends Controller {
     @FXML private ListView<Object> elementsListView;
@@ -40,6 +42,7 @@ public class BuyerViewController extends Controller {
 
     @FXML
     private void initialize() {
+        Application.setUserAgentStylesheet(Objects.requireNonNull(getClass().getResource("main.css")).toExternalForm());
         orderAmountField.setText("0");
         productDetailsPane.setVisible(false);
         categories = new ArrayList<>();
