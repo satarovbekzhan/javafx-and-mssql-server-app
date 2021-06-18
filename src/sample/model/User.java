@@ -2,18 +2,14 @@ package sample.model;
 
 public class User {
     private final Integer id;
-    private final String firstname;
-    private final String lastname;
     private final String email;
-    private final String password;
+    private final String pass;
     private final Role role;
 
-    public User(Integer id, String firstname, String lastname, String email, String password, Role role) {
+    public User(Integer id, String email, String pass, Role role) {
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
         this.email = email;
-        this.password = password;
+        this.pass = pass;
         this.role = role;
     }
 
@@ -21,20 +17,12 @@ public class User {
         return id;
     }
 
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
     public String getEmail() {
         return email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPass() {
+        return pass;
     }
 
     public Role getRole() {
@@ -45,10 +33,8 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", pass='" + pass + '\'' +
                 ", role=" + role +
                 '}';
     }

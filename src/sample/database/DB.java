@@ -26,7 +26,7 @@ public abstract class DB {
         // Create connection url from given username and password
         String host = "127.0.0.1";
         String port = "1433";
-        String database = "makk";
+        String database = "mmm";
         String connUrl = "jdbc:sqlserver://" + host + ":" + port +
                 ";databaseName=" + database + ";user=" + username + ";password=" + password + ";";
 

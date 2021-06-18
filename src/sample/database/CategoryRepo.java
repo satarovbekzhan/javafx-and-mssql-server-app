@@ -20,7 +20,7 @@ public class CategoryRepo extends DB {
         List<Category> list = new ArrayList<>();
         String sql = "SELECT [id]\n" +
                 "      ,[name]\n" +
-                "  FROM [makk].[dbo].[category]";
+                "  FROM [dbo].[category]";
         try {
             PreparedStatement stm = getConnection().prepareStatement(sql);
             ResultSet result = stm.executeQuery();

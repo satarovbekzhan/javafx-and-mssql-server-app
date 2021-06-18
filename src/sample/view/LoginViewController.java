@@ -37,7 +37,7 @@ public class LoginViewController {
         roleChoiceBox.getItems().add(Role.BUYER);
         roleChoiceBox.setValue(Role.ADMIN);
 
-        emailTextField.setText("makk_user");
+        emailTextField.setText("makk_admin");
         passwordTextField.setText("123");
 
         info("Authorization required! Choose a ROLE and give your credentials to get an access.", null);
