@@ -4,9 +4,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="80.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.admin.components.UserItemViewController">
+<AnchorPane prefHeight="90.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.admin.components.UserItemViewController">
    <children>
       <BorderPane prefHeight="18.0" prefWidth="411.0">
+         <padding>
+            <Insets left="10.0" right="10.0" top="10.0" />
+         </padding>
          <top>
             <HBox prefHeight="12.0" prefWidth="401.0" spacing="4.0" BorderPane.alignment="CENTER">
                <children>
@@ -19,17 +22,25 @@
                </BorderPane.margin>
             </HBox>
          </top>
-         <bottom>
+         <center>
             <HBox alignment="CENTER_RIGHT" prefHeight="3.0" prefWidth="401.0" spacing="4.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onAction="#updateUser" prefHeight="25.0" prefWidth="194.0" text="Update User" />
-                  <Button mnemonicParsing="false" onAction="#deleteUser" prefHeight="25.0" prefWidth="194.0" text="Delete User" />
+                  <Label fx:id="userIdLabel" prefHeight="25.0" prefWidth="265.0" text="###">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding></Label>
+                  <Button mnemonicParsing="false" onAction="#updateUser" prefHeight="25.0" prefWidth="62.0" text="Update" />
+                  <Button mnemonicParsing="false" onAction="#deleteUser" prefHeight="25.0" prefWidth="58.0" text="Delete" />
                </children>
             </HBox>
+         </center>
+         <bottom>
+            <Separator prefWidth="411.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="10.0" top="20.0" />
+               </BorderPane.margin>
+            </Separator>
          </bottom>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
       </BorderPane>
    </children>
 </AnchorPane>

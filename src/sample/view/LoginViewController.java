@@ -91,6 +91,9 @@ public class LoginViewController {
         // makk_user | 123
         try {
             DB.initializeDatabaseModels(emailTextField.getText(), passwordTextField.getText());
+            String authUserRole = DB.testRepo.getLoginData();
+            if (!roleChoiceBox.getSelectionModel().getSelectedItem().toString().equals(authUserRole))
+                return "You do not have a " + roleChoiceBox.getSelectionModel().getSelectedItem().toString() + " role";
         } catch (SQLException throwable) {
             return throwable.getLocalizedMessage();
         }

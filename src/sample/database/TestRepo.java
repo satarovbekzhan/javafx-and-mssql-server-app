@@ -1,8 +1,5 @@
 package sample.database;
 
-import sample.database.lamda.OnError;
-import sample.database.lamda.OnSucceed;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,23 +15,8 @@ public class TestRepo extends DB {
         PreparedStatement stm = getConnection().prepareStatement(sql);
         ResultSet result = stm.executeQuery();
         while (result.next()) {
-            String str = result.getString("");
-            return str;
+            return result.getString("");
         }
         return "";
     }
-
-//    public boolean auth() {
-//        String sql = "";
-//        try {
-//            PreparedStatement stm = getConnection().prepareStatement(sql);
-//            ResultSet result = stm.executeQuery();
-//            while (result.next()) {
-//                String str = result.getString("");
-//                onSucceed.operate(str);
-//            }
-//        } catch (SQLException e) {
-//            onError.operate(e.getMessage());
-//        }
-//    }
 }

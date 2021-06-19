@@ -5,6 +5,7 @@ import sample.database.lamda.OnSucceed;
 import sample.model.Role;
 import sample.model.User;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,16 +48,79 @@ public class UserRepo extends DB {
         onSucceed.operate(list);
     }
 
-    public void createUser(User user, OnSucceed<User> onSucceed, OnError onError) {
-        String sql = "EXEC sp_create_user @email = ?, @pass = ?, @role = ?;";
+    public void getUserByEmail(String email, OnSucceed<User> onSucceed, OnError onError) {
+        String sql = "SELECT [id]\n" +
+                "      ,[email]\n" +
+                "      ,[pass]\n" +
+                "      ,[role]\n" +
+                "  FROM [dbo].[user]\n" +
+                "  WHERE [email] = ?";
         try {
             PreparedStatement stm = getConnection().prepareStatement(sql);
+            stm.setString(1, email);
+            ResultSet result = stm.executeQuery();
+            while (result.next()) {
+                Integer userId = result.getInt("id");
+                String userEmail = result.getString("email");
+                String userPassword = result.getString("pass");
+                Role userRole = null;
+                switch (result.getString("role")) {
+                    case "ADMIN": userRole = Role.ADMIN;
+                        break;
+                    case "STAFF": userRole = Role.STAFF;
+                        break;
+                    case "BUYER": userRole = Role.BUYER;
+                }
+                System.out.println("User found by email " + userId + " " + userEmail);
+                onSucceed.operate(new User(userId, userEmail, userPassword, userRole));
+                break;
+            }
+        } catch (SQLException e) {
+            onError.operate(e.getMessage());
+        }
+    }
+
+    public void createUser(User user, OnSucceed<User> onSucceed, OnError onError) {
+        String sql = "{call dbo.sp_create_user(?, ?, ?)}";
+
+        try {
+            CallableStatement stm = getConnection().prepareCall(sql);
             stm.setString(1, user.getEmail());
             stm.setString(2, user.getPass());
             stm.setString(3, user.getRole().toString());
-            int i = stm.executeUpdate();
-            if (i > 0) onSucceed.operate(user);
-            else onError.operate("Error while creating a user");
+
+            stm.execute();
+            getUserByEmail(user.getEmail(), onSucceed, onError);
+        } catch (SQLException e) {
+            onError.operate(e.getMessage());
+        }
+    }
+
+    public void deleteUser(User user, OnSucceed<User> onSucceed, OnError onError) {
+        String sql = "{call dbo.sp_delete_user(?)}";
+        try {
+            CallableStatement stm = getConnection().prepareCall(sql);
+            stm.setString(1, user.getEmail());
+
+            stm.execute();
+
+            onSucceed.operate(user);
+        } catch (SQLException e) {
+            onError.operate(e.getMessage());
+        }
+    }
+
+    public void updateUser(User user, OnSucceed<User> onSucceed, OnError onError) {
+        String sql = "{call dbo.sp_update_user(?, ?, ?, ?)}";
+        try {
+            CallableStatement stm = getConnection().prepareCall(sql);
+            stm.setInt(1, user.getId());
+            stm.setString(2, user.getEmail());
+            stm.setString(3, user.getPass());
+            stm.setString(4, user.getRole().toString());
+
+            stm.execute();
+            getUserByEmail(user.getEmail(), onSucceed, onError);
         } catch (SQLException e) {
             onError.operate(e.getMessage());
         }

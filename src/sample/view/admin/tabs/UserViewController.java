@@ -30,6 +30,7 @@ public class UserViewController {
             @Override
             protected void updateItem(User item, boolean empty) {
                 super.updateItem(item, empty);
+                setStyle("-fx-background-color: #ffffff");
                 if (item == null || empty) {
                     setText(null);
                     setGraphic(null);
@@ -70,7 +71,10 @@ public class UserViewController {
             return;
         }
         DB.userRepo.createUser(new User(0, email, password, roleChoiceBox.getValue()),
-                userObservableList::add, this::alert);
+                result -> {
+                    userObservableList.add(result);
+                    new Alert(Alert.AlertType.CONFIRMATION, "User created!", ButtonType.OK).showAndWait();
+                }, this::alert);
     }
 
     private void alert(String text) {
