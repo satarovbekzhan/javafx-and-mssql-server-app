@@ -60,6 +60,5 @@ public class UserRepo extends DB {
         } catch (SQLException e) {
             onError.operate(e.getMessage());
         }
-        onSucceed.operate(user);
     }
 }

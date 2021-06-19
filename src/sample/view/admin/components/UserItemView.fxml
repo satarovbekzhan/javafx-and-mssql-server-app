@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="80.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.admin.components.UserItemViewController">
+   <children>
+      <BorderPane prefHeight="18.0" prefWidth="411.0">
+         <top>
+            <HBox prefHeight="12.0" prefWidth="401.0" spacing="4.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="emailTextField" prefHeight="25.0" promptText="email" />
+                  <TextField fx:id="passwordTextField" prefHeight="25.0" promptText="password" />
+                  <ChoiceBox fx:id="roleChoiceBox" prefHeight="25.0" prefWidth="102.0" />
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="4.0" />
+               </BorderPane.margin>
+            </HBox>
+         </top>
+         <bottom>
+            <HBox alignment="CENTER_RIGHT" prefHeight="3.0" prefWidth="401.0" spacing="4.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#updateUser" prefHeight="25.0" prefWidth="194.0" text="Update User" />
+                  <Button mnemonicParsing="false" onAction="#deleteUser" prefHeight="25.0" prefWidth="194.0" text="Delete User" />
+               </children>
+            </HBox>
+         </bottom>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </BorderPane>
+   </children>
+</AnchorPane>

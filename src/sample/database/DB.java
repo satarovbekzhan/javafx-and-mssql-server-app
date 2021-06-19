@@ -30,10 +30,7 @@ public abstract class DB {
         String connUrl = "jdbc:sqlserver://" + host + ":" + port +
                 ";databaseName=" + database + ";user=" + username + ";password=" + password + ";";
 
-        // Create an instance of a DB and try to get connection
-//        DB db = new DB(connUrl);
-//        db.getConnection();
-
+        // Create an instance of a TestRepo and try to get connection
         testRepo = new TestRepo(connUrl);
         System.out.println("LOGGED IN AS: " + testRepo.getLoginData());
 

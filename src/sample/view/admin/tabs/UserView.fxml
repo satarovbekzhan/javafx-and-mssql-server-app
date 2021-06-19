@@ -16,11 +16,7 @@
                   <Button mnemonicParsing="false" onAction="#createNewUser" prefHeight="25.0" prefWidth="71.0" text="Erstellen" />
                </children>
             </HBox>
-            <ListView fx:id="userListView" prefHeight="577.0" prefWidth="440.0" >
-               <placeholder>
-                  <Label text="Es gibt noch keine Benutzer!" />
-               </placeholder>
-            </ListView>
+            <ListView fx:id="userListView" prefHeight="577.0" prefWidth="440.0"/>
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

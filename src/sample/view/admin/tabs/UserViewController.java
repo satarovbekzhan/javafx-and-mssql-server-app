@@ -3,10 +3,15 @@ package sample.view.admin.tabs;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import sample.database.DB;
 import sample.model.Role;
 import sample.model.User;
+import sample.view.admin.components.UserItemViewController;
+
+import java.io.IOException;
 
 public class UserViewController {
 
@@ -22,16 +27,24 @@ public class UserViewController {
     public void initialize() {
         userListView.setItems(userObservableList);
         userListView.setCellFactory(param -> new ListCell<>() {
-            private final TextField userEmailTextField = new TextField("");
             @Override
             protected void updateItem(User item, boolean empty) {
+                super.updateItem(item, empty);
                 if (item == null || empty) {
                     setText(null);
                     setGraphic(null);
                 } else {
-                    setText(item.getEmail());
-                    userEmailTextField.setText(item.getId() + " - " + item.getEmail());
-                    setGraphic(userEmailTextField);
+                    setText(null);
+                    try {
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(this.getClass().getResource("../components/UserItemView.fxml"));
+                        Parent userView = loader.load();
+                        UserItemViewController userController = loader.getController();
+                        userController.construct(item, userObservableList);
+                        setGraphic(userView);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -41,15 +54,6 @@ public class UserViewController {
         roleChoiceBox.getItems().add(Role.BUYER);
         roleChoiceBox.setValue(Role.BUYER);
 
-        postInitialize();
-    }
-
-    private void postInitialize() {
-        refreshUserObservableList();
-    }
-
-    private void refreshUserObservableList() {
-        userObservableList.clear();
         DB.userRepo.getAllUsers(userObservableList::addAll, System.out::println);
     }
 
@@ -66,7 +70,7 @@ public class UserViewController {
             return;
         }
         DB.userRepo.createUser(new User(0, email, password, roleChoiceBox.getValue()),
-                result -> refreshUserObservableList(), this::alert);
+                userObservableList::add, this::alert);
     }
 
     private void alert(String text) {
