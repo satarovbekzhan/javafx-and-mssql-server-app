@@ -13,12 +13,21 @@
             <VBox prefHeight="560.0" prefWidth="369.0" spacing="20.0">
                <children>
                   <ListView fx:id="elementsListView" prefHeight="494.0" prefWidth="284.0" />
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goToCart" styleClass="button" text="Warenkorb">
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </Button>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goToPayment" styleClass="button" text="Kaufen">
+                  <HBox prefHeight="73.0" prefWidth="362.0" spacing="20.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#goToCart" prefHeight="37.0" prefWidth="201.0" styleClass="button" text="Warenkorb">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#goToPayment" prefHeight="37.0" prefWidth="148.0" styleClass="button, btn-success" text="Kaufen">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" onAction="#logoutFromSystem" prefHeight="37.0" prefWidth="388.0" styleClass="btn-error" text="Abmelden vom System">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
@@ -31,7 +40,6 @@
                      <content>
                         <VBox maxWidth="1.7976931348623157E308" prefHeight="690.0" prefWidth="469.0" spacing="40.0">
                            <children>
-                              <Text fx:id="titleText" styleClass="text-lg" text="Hamburger Title Name" wrappingWidth="455.0" />
                               <BorderPane prefHeight="295.0" prefWidth="457.0">
                                  <center>
                                     <ImageView fx:id="productImageView" fitHeight="296.0" fitWidth="290.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
@@ -41,19 +49,24 @@
                                     </ImageView>
                                  </center>
                               </BorderPane>
-                              <BorderPane maxWidth="-Infinity" prefHeight="25.0" prefWidth="345.0" translateX="57.0">
-                                 <center>
-                                    <TextField fx:id="orderAmountField" disable="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="46.0" styleClass="txt-c" BorderPane.alignment="CENTER" />
-                                 </center>
+                              <Text fx:id="titleText" styleClass="text-lg" text="Hamburger Title Name" wrappingWidth="455.0" />
+                              <BorderPane prefHeight="26.0" prefWidth="441.0">
                                  <left>
-                                    <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#removeProductFromCart" prefHeight="25.0" prefWidth="110.0" styleClass="btn-error" text="reduzieren" BorderPane.alignment="CENTER" />
+                                    <BorderPane maxWidth="-Infinity" prefHeight="25.0" prefWidth="329.0" BorderPane.alignment="CENTER">
+                                       <center>
+                                          <TextField fx:id="orderAmountField" disable="true" maxWidth="-Infinity" prefHeight="25.0" prefWidth="46.0" styleClass="txt-c" BorderPane.alignment="CENTER" />
+                                       </center>
+                                       <left>
+                                          <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#removeProductFromCart" prefHeight="25.0" prefWidth="110.0" styleClass="btn-error" text="reduzieren" BorderPane.alignment="CENTER" />
+                                       </left>
+                                       <right>
+                                          <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#addProductToCart" prefHeight="25.0" prefWidth="110.0" styleClass="btn-success" text="erhöhen" BorderPane.alignment="CENTER" />
+                                       </right>
+                                    </BorderPane>
                                  </left>
                                  <right>
-                                    <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#addProductToCart" prefHeight="25.0" prefWidth="110.0" styleClass="btn-success" text="erhöhen" BorderPane.alignment="CENTER" />
+                                    <Label fx:id="productPriceLabel" alignment="CENTER" prefHeight="41.0" prefWidth="109.0" text="### €" textAlignment="RIGHT" BorderPane.alignment="CENTER" />
                                  </right>
-                                 <padding>
-                                    <Insets left="10.0" right="10.0" />
-                                 </padding>
                               </BorderPane>
                               <Text fx:id="descriptionText" styleClass="text, text-md" text="Minced and reformed beef in a vaguely disc-shaped slab, cooked, and placed inside a bread roll, possibly along with various vegetables and sauces. Usually the meat is sourced from cheap offcuts and has a higher than average fat content. That being said, there is something distinctly refreshing about biting into a great greasy burger once every so often." wrappingWidth="455.0" />
                               <VBox fx:id="nutrientsVBox" maxWidth="-Infinity" prefHeight="0.0" prefWidth="455.0" spacing="10.0" styleClass="text-md">

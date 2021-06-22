@@ -7,10 +7,9 @@
 
 <VBox maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.LoginViewController">
    <children>
-      <ChoiceBox fx:id="roleChoiceBox" prefHeight="25.0" prefWidth="220.0" />
       <TextField fx:id="emailTextField" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" promptText="E-Mail" />
       <TextField fx:id="passwordTextField" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" promptText="Password" />
-      <Button styleClass="btn" fx:id="authorizeButton" maxWidth="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAuthorizeButtonClicked" prefWidth="200.0" text="Authorize" />
+      <Button fx:id="authorizeButton" maxWidth="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAuthorizeButtonClicked" prefWidth="200.0" styleClass="btn" text="Authorize" />
       <Text fx:id="infoText" wrappingWidth="219.96484375" />
    </children>
    <padding>

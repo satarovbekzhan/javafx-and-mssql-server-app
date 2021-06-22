@@ -4,6 +4,9 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,11 +15,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import sample.Main;
 import sample.database.DB;
 import sample.model.Category;
 import sample.model.Product;
 import sample.view.Controller;
+import sample.view.LoginViewController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +39,7 @@ public class BuyerViewController extends Controller {
     @FXML private VBox nutrientsVBox;
 
     @FXML private TextField orderAmountField;
+    @FXML private Label productPriceLabel;
 
     private ArrayList<Category> categories;
     private HashMap<Integer, List<Product>> productsByCategory;
@@ -111,6 +118,8 @@ public class BuyerViewController extends Controller {
             else descriptionText.setText(description);
             ingredientsText.setText(selectedProduct.getIngredients());
             updateOrderAmountValueField();
+            // TODO: 6/22/2021 actual price of a product
+            productPriceLabel.setText("4.99" + " €");
         }
         disOrEnableElementsListView();
     }
@@ -215,5 +224,23 @@ public class BuyerViewController extends Controller {
     @FXML
     public void goToPayment() {
         //
+    }
+
+    @FXML
+    public void logoutFromSystem() {
+        try {
+            Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("view/LoginView.fxml"));
+            Parent root = loader.load();
+            LoginViewController lvc = loader.getController();
+            lvc.setApp(getStage());
+            getStage().setTitle("MAKK");
+            getStage().setScene(new Scene(root));
+            getStage().setResizable(false);
+            getStage().show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

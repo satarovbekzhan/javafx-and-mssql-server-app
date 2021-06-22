@@ -9,38 +9,32 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import sample.database.DB;
-import sample.model.Role;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class LoginViewController {
-    @FXML private ChoiceBox<Role> roleChoiceBox;
     @FXML private TextField emailTextField;
     @FXML private TextField passwordTextField;
     @FXML private Button authorizeButton;
     @FXML private Text infoText;
 
     private Stage app;
+    private String authUserRole = "";
 
     @FXML
     private void initialize() {
-        roleChoiceBox.getItems().add(Role.ADMIN);
-        roleChoiceBox.getItems().add(Role.STAFF);
-        roleChoiceBox.getItems().add(Role.BUYER);
-        roleChoiceBox.setValue(Role.ADMIN);
 
-        emailTextField.setText("makk_admin");
-        passwordTextField.setText("123");
+        emailTextField.setText("admin");
+        passwordTextField.setText("admin");
 
-        info("Authorization required! Choose a ROLE and give your credentials to get an access.", null);
+        info("Authorization required! Give your credentials to get an access.", null);
     }
 
     @FXML
@@ -91,9 +85,9 @@ public class LoginViewController {
         // makk_user | 123
         try {
             DB.initializeDatabaseModels(emailTextField.getText(), passwordTextField.getText());
-            String authUserRole = DB.testRepo.getLoginData();
-            if (!roleChoiceBox.getSelectionModel().getSelectedItem().toString().equals(authUserRole))
-                return "You do not have a " + roleChoiceBox.getSelectionModel().getSelectedItem().toString() + " role";
+            authUserRole = DB.testRepo.getLoginData();
+            if (!(authUserRole.equals("ADMIN") || authUserRole.equals("STAFF") || authUserRole.equals("BUYER")))
+                return "You do not have any role to access the system!";
         } catch (SQLException throwable) {
             return throwable.getLocalizedMessage();
         }
@@ -102,15 +96,14 @@ public class LoginViewController {
 
     private void proceed() {
         String pathToView;
-        Role role = roleChoiceBox.getSelectionModel().getSelectedItem();
-        switch (role) {
-            case ADMIN:
+        switch (authUserRole) {
+            case "ADMIN":
                 pathToView = "admin/AdminView.fxml";
                 break;
-            case STAFF:
+            case "STAFF":
                 pathToView = "staff/StaffView.fxml";
                 break;
-            case BUYER:
+            case "BUYER":
                 pathToView = "buyer/BuyerView.fxml";
                 break;
             default:
@@ -123,7 +116,7 @@ public class LoginViewController {
             Parent root = loader.load();
             Controller controller = loader.getController();
             controller.setStage(app);
-            this.app.setTitle("MAKK@" + role);
+            this.app.setTitle("MAKK | " + authUserRole + " | " + emailTextField.getText());
             this.app.setScene(new Scene(root));
             this.app.show();
         } catch (IOException e) {
@@ -133,7 +126,6 @@ public class LoginViewController {
     }
 
     private void setDisableControls(boolean disable) {
-        roleChoiceBox.setDisable(disable);
         passwordTextField.setDisable(disable);
         authorizeButton.setDisable(disable);
         emailTextField.setDisable(disable);

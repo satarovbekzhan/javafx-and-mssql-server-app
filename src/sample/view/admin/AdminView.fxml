@@ -3,9 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="650.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.admin.AdminViewController">
+<AnchorPane prefHeight="650.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.admin.AdminViewController">
    <children>
-      <TabPane prefHeight="650.0" prefWidth="460.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="650.0" prefWidth="1007.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Users">
             <content>
