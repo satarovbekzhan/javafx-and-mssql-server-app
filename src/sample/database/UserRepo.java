@@ -18,6 +18,54 @@ public class UserRepo extends DB {
         super(url);
     }
 
+    public boolean hasItemsIn(int offset, int limit) {
+        try {
+            PreparedStatement stm = getConnection()
+                    .prepareStatement("SELECT * FROM [user] ORDER BY [id] OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;");
+            stm.setInt(1, offset);
+            stm.setInt(2, limit);
+            ResultSet result = stm.executeQuery();
+            if (result.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+        return false;
+    }
+
+    public void getUsers(int offset, int limit, OnSucceed<List<User>> onSucceed, OnError onError) {
+        List<User> list = new ArrayList<>();
+        String sql = "SELECT [id], [email], [pass], [role]\n" +
+                "FROM [dbo].[user]\n" +
+                "ORDER BY [id]\n" +
+                "OFFSET ? ROWS\n" +
+                "FETCH NEXT ? ROWS ONLY;";
+        try {
+            PreparedStatement stm = getConnection().prepareStatement(sql);
+            stm.setInt(1, offset);
+            stm.setInt(2, limit);
+            ResultSet result = stm.executeQuery();
+            while (result.next()) {
+                Integer id = result.getInt("id");
+                String email = result.getString("email");
+                String password = result.getString("pass");
+                Role role = null;
+                switch (result.getString("role")) {
+                    case "ADMIN": role = Role.ADMIN;
+                        break;
+                    case "STAFF": role = Role.STAFF;
+                        break;
+                    case "BUYER": role = Role.BUYER;
+                }
+                list.add(new User(id, email, password, role));
+            }
+        } catch (SQLException e) {
+            onError.operate(e.getMessage());
+        }
+        onSucceed.operate(list);
+    }
+
     public void getAllUsers(OnSucceed<List<User>> onSucceed, OnError onError) {
         List<User> list = new ArrayList<>();
         String sql = "SELECT TOP (1000) [id]\n" +

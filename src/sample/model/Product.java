@@ -34,4 +34,12 @@ public class Product {
     public String getIngredients() {
         return ingredients;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }
