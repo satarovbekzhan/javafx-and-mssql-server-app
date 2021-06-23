@@ -47,4 +47,38 @@ public class CompositionRepo extends DB {
             onError.operate(e.getMessage());
         }
     }
+
+    public void getAllNutrient(OnSucceed<List<Nutrient>> onSucceed, OnError onError) {
+        List<Nutrient> list = new ArrayList<>();
+        String sql = "SELECT [id], [name] FROM [dbo].[nutrient]";
+        try {
+            PreparedStatement stm = getConnection().prepareStatement(sql);
+            ResultSet result = stm.executeQuery();
+            while (result.next()) {
+                Integer id = result.getInt("id");
+                String name = result.getString("name");
+                list.add(new Nutrient(id, name));
+            }
+            onSucceed.operate(list);
+        } catch (SQLException e) {
+            onError.operate(e.getMessage());
+        }
+    }
+
+    public void getAllUnits(OnSucceed<List<Unit>> onSucceed, OnError onError) {
+        List<Unit> list = new ArrayList<>();
+        String sql = "SELECT [id], [name] FROM [dbo].[unit]";
+        try {
+            PreparedStatement stm = getConnection().prepareStatement(sql);
+            ResultSet result = stm.executeQuery();
+            while (result.next()) {
+                Integer id = result.getInt("id");
+                String name = result.getString("name");
+                list.add(new Unit(id, name));
+            }
+            onSucceed.operate(list);
+        } catch (SQLException e) {
+            onError.operate(e.getMessage());
+        }
+    }
 }

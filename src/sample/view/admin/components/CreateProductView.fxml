@@ -11,37 +11,35 @@
                <children>
                   <ScrollPane prefHeight="495.0" prefWidth="415.0" style="-fx-background-color: transparent;">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="395.0">
-                           <children>
                               <VBox prefHeight="495.0" prefWidth="395.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <TextField promptText="Produkttitel" />
+                                    <TextField fx:id="productTitleTextField" promptText="Produkttitel" />
                                     <HBox prefHeight="21.0" prefWidth="395.0" spacing="20.0">
                                        <children>
-                                          <TextField prefHeight="25.0" prefWidth="319.0" promptText="Produktbild-URL" />
-                                          <TextField promptText="Produktpreis (€)" />
+                                          <TextField fx:id="productPictureTextField" prefHeight="25.0" prefWidth="319.0" promptText="Produktbild-URL" />
+                                          <TextField fx:id="productPriceTextField" promptText="Produktpreis (€)" />
                                        </children>
                                     </HBox>
-                                    <TextArea prefHeight="137.0" prefWidth="395.0" promptText="Produkt-Kurzbeschreibung" />
+                                    <TextArea fx:id="productDescriptionTextArea" minHeight="-Infinity" prefHeight="137.0" prefWidth="395.0" promptText="Produkt-Kurzbeschreibung" />
                                     <Separator prefWidth="200.0" />
                                     <VBox prefHeight="58.0" prefWidth="395.0" spacing="10.0">
                                        <children>
                                           <HBox prefHeight="17.0" prefWidth="395.0" spacing="20.0">
                                              <children>
-                                                <Label prefHeight="17.0" prefWidth="136.0" text="Närwerte" />
-                                                <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="42.0" text="##" />
-                                                <Label alignment="CENTER" prefWidth="55.0" text="Pro 100g" />
-                                                <Label alignment="CENTER" prefWidth="55.0" text="Pro Por." />
+                                                <Label prefHeight="17.0" prefWidth="136.0" style="-fx-font-weight: bolder;" text="Närwerte" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="42.0" style="-fx-font-weight: bolder;" text="##" />
+                                                <Label alignment="CENTER" prefWidth="55.0" style="-fx-font-weight: bolder;" text="Pro 100g" />
+                                                <Label alignment="CENTER" prefWidth="55.0" style="-fx-font-weight: bolder;" text="Pro Por." />
                                              </children>
                                           </HBox>
-                                          <VBox prefHeight="0.0" prefWidth="395.0" spacing="10.0" />
+                                          <VBox fx:id="compositionVBox" prefHeight="0.0" prefWidth="395.0" spacing="10.0" />
                                           <HBox layoutX="10.0" layoutY="65.0" prefHeight="25.0" prefWidth="395.0" spacing="20.0">
                                              <children>
-                                                <ChoiceBox prefWidth="136.0" />
-                                                <ChoiceBox prefHeight="25.0" prefWidth="46.0" />
-                                                <TextField prefHeight="25.0" prefWidth="55.0" promptText="4.00" />
-                                                <TextField prefHeight="25.0" prefWidth="55.0" promptText="2.85" />
-                                                <Button mnemonicParsing="false" onAction="#addCompositionProduct" prefHeight="25.0" prefWidth="29.0" text="+" />
+                                                <ChoiceBox fx:id="nutrientChoiceBox" prefWidth="136.0" />
+                                                <ChoiceBox fx:id="unitChoiceBox" prefHeight="25.0" prefWidth="46.0" />
+                                                <TextField fx:id="proHunTextField" prefHeight="25.0" prefWidth="55.0" promptText="4.00" />
+                                                <TextField fx:id="proPorTextField" prefHeight="25.0" prefWidth="55.0" promptText="2.85" />
+                                                <Button mnemonicParsing="false" onAction="#addCompositionToProduct" prefHeight="25.0" prefWidth="29.0" text="+" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -49,11 +47,11 @@
                                     <Separator prefWidth="200.0" />
                                     <VBox prefHeight="117.0" prefWidth="395.0" spacing="10.0">
                                        <children>
-                                          <Label prefHeight="17.0" prefWidth="397.0" text="Produkt-Kategorien" />
-                                          <VBox prefHeight="0.0" prefWidth="395.0" />
+                                          <Label prefHeight="17.0" prefWidth="397.0" style="-fx-font-weight: bolder;" text="Produkt-Kategorien" />
+                                          <VBox fx:id="categoryVBox" prefHeight="0.0" prefWidth="395.0" spacing="10.0" />
                                           <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                              <children>
-                                                <ChoiceBox prefHeight="25.0" prefWidth="233.0" />
+                                                <ChoiceBox fx:id="categoryChoiceBox" prefHeight="25.0" prefWidth="233.0" />
                                                 <Button mnemonicParsing="false" onAction="#addProductToCategory" text="Zur Kategorie zuordnen" />
                                              </children>
                                           </HBox>
@@ -61,7 +59,6 @@
                                     </VBox>
                                  </children>
                               </VBox>
-                           </children></AnchorPane>
                     </content>
                   </ScrollPane>
                </children></Pane>
