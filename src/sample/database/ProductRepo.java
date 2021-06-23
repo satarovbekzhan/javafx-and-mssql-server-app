@@ -60,6 +60,29 @@ public class ProductRepo extends DB {
         }
     }
 
+    public void getProductById(Integer productId, OnSucceed<Product> onSucceed, OnError onError) {
+        String sql = "SELECT P.[id], P.[title], P.[description], P.[picture], P.[ingredients]\n" +
+                "FROM [dbo].[product] AS P\n" +
+                "WHERE P.[id] = ?;";
+        try {
+            PreparedStatement stm = getConnection().prepareStatement(sql);
+            stm.setInt(1, productId);
+            ResultSet result = stm.executeQuery();
+            if (result.next()) {
+                Integer id = result.getInt("id");
+                String title = result.getString("title");
+                String description = result.getString("description");
+                String picture = result.getString("picture");
+                String ingredients = result.getString("ingredients");
+                onSucceed.operate(new Product(id, title, description, picture, ingredients));
+            } else {
+                onError.operate("Produkt mit ID " + productId + " nicht gefunden!");
+            }
+        } catch (SQLException e) {
+            onError.operate(e.getMessage());
+        }
+    }
+
     public void getProductsByCategoryId(Integer categoryId, OnSucceed<List<Product>> onSucceed, OnError onError) {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT P.[id], P.[title], P.[description], P.[picture], P.[ingredients]\n" +
@@ -101,13 +124,13 @@ public class ProductRepo extends DB {
         onSucceed.operate(product);
     }
 
-    public void getNewestPriceByProduct(Product product, OnSucceed<Price> onSucceed, OnError onError) {
+    public void getNewestPriceByProductId(Integer productId, OnSucceed<Price> onSucceed, OnError onError) {
         String sql = "SELECT [id], [product], [value], [starting]\n" +
                 "FROM [dbo].[price]\n" +
                 "WHERE starting IN (SELECT max(starting) FROM [dbo].[price] WHERE [product] = ?);";
         try {
             PreparedStatement stm = getConnection().prepareStatement(sql);
-            stm.setInt(1, product.getId());
+            stm.setInt(1, productId);
             ResultSet result = stm.executeQuery();
             if (result.next()) {
                 Integer id = result.getInt("id");

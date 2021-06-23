@@ -31,8 +31,10 @@ public class LoginViewController {
     @FXML
     private void initialize() {
 
-        emailTextField.setText("admin");
-        passwordTextField.setText("admin");
+//        emailTextField.setText("admin");
+//        passwordTextField.setText("admin");
+        emailTextField.setText("bekzhan");
+        passwordTextField.setText("1304");
 
         info("Authorization required! Give your credentials to get an access.", null);
     }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="560.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.buyer.CartViewController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <Pane prefHeight="484.0" prefWidth="460.0">
+               <children>
+                  <ScrollPane prefHeight="484.0" prefWidth="460.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="484.0" prefWidth="445.0">
+                           <children>
+                              <VBox fx:id="itemsVBox" prefHeight="1200.0" prefWidth="437.0" spacing="10.0" AnchorPane.bottomAnchor="-387.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
+               </children></Pane>
+            <AnchorPane prefHeight="25.0" prefWidth="460.0">
+               <children>
+                  <Button fx:id="orderButton" layoutX="275.0" mnemonicParsing="false" onAction="#orderProducts" prefHeight="25.0" prefWidth="185.0" styleClass="btn-success" text="Bestellen" />
+                  <Label fx:id="totalPriceLabel" layoutY="4.0" prefHeight="17.0" prefWidth="171.0" text="###" />
+               </children>
+            </AnchorPane>
+         </children></VBox>
+   </children>
+</AnchorPane>

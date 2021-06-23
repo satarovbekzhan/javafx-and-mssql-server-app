@@ -157,3 +157,9 @@
 /*    -fx-padding: 4;*/
 /*    -fx-shape: "M 0 0 h 7 l -3.5 4 z";*/
 /*}*/
+
+.separator *.line {
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+
+}

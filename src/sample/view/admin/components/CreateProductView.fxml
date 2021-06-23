@@ -41,7 +41,7 @@
                                                 <ChoiceBox prefHeight="25.0" prefWidth="46.0" />
                                                 <TextField prefHeight="25.0" prefWidth="55.0" promptText="4.00" />
                                                 <TextField prefHeight="25.0" prefWidth="55.0" promptText="2.85" />
-                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" text="+" />
+                                                <Button mnemonicParsing="false" onAction="#addCompositionProduct" prefHeight="25.0" prefWidth="29.0" text="+" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -54,7 +54,7 @@
                                           <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                              <children>
                                                 <ChoiceBox prefHeight="25.0" prefWidth="233.0" />
-                                                <Button mnemonicParsing="false" text="Zur Kategorie zuordnen" />
+                                                <Button mnemonicParsing="false" onAction="#addProductToCategory" text="Zur Kategorie zuordnen" />
                                              </children>
                                           </HBox>
                                        </children>

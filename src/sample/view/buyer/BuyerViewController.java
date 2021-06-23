@@ -15,6 +15,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import sample.Main;
 import sample.database.DB;
 import sample.model.Category;
@@ -119,7 +121,7 @@ public class BuyerViewController extends Controller {
 //            ingredientsText.setText(selectedProduct.getIngredients());
             ingredientsText.setText("MAKK\"BURGERS\"TM");
             updateOrderAmountValueField();
-            DB.productRepo.getNewestPriceByProduct(product,
+            DB.productRepo.getNewestPriceByProductId(product.getId(),
                     result -> productPriceLabel.setText(result.getValue() + " €"),
                     error -> productPriceLabel.setText("-.--" + " €"));
         }
@@ -212,20 +214,40 @@ public class BuyerViewController extends Controller {
 
     private void updateOrderAmountValueField() {
         if (selectedProduct != null) {
-            if (orderItems.containsKey(selectedProduct.getId()))
+            if (orderItems.containsKey(selectedProduct.getId())) {
                 orderAmountField.setText(String.valueOf(orderItems.get(selectedProduct.getId())));
+            }
             else orderAmountField.setText("0");
         }
+
+        List<Integer> p_ids = new ArrayList<>();
+        orderItems.forEach((id, amount) -> {
+            if (amount == 0) p_ids.add(id);
+        });
+        p_ids.forEach(id -> {
+            if (orderItems.containsKey(id) && orderItems.get(id) == 0) orderItems.remove(id);
+        });
     }
 
     @FXML
     public void goToCart() {
-        //
-    }
-
-    @FXML
-    public void goToPayment() {
-        //
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(this.getClass().getResource("CartView.fxml"));
+            Parent root = loader.load();
+            CartViewController cvc = loader.getController();
+            cvc.setOrderItems(orderItems);
+            Stage stage = new Stage();
+            cvc.setStage(stage);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(getStage());
+            stage.setTitle("Warenkorb");
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

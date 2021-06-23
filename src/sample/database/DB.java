@@ -10,6 +10,7 @@ public abstract class DB {
     public static CategoryRepo categoryRepo;
     public static ProductRepo productRepo;
     public static CompositionRepo compositionRepo;
+    public static OrderRepo orderRepo;
 
     private final String url;
 
@@ -39,5 +40,6 @@ public abstract class DB {
         categoryRepo = new CategoryRepo(connUrl);
         productRepo = new ProductRepo(connUrl);
         compositionRepo = new CompositionRepo(connUrl);
+        orderRepo = new OrderRepo(connUrl);
     }
 }
