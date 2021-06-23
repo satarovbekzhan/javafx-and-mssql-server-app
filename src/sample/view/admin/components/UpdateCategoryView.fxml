@@ -3,9 +3,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.admin.components.UpdateCategoryViewController">
+<AnchorPane prefHeight="129.0" prefWidth="317.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.admin.components.UpdateCategoryViewController">
    <children>
-      <Label layoutX="293.0" layoutY="183.0" text="update category" />
+      <VBox prefHeight="107.0" prefWidth="317.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <Label text="Geben Sie einen neuen Namen für die Kategorie ein" />
+            <TextField fx:id="nameTextField" />
+            <Button mnemonicParsing="false" onAction="#updateCategoryName" prefHeight="25.0" prefWidth="327.0" text="Kategoriename aktualisieren" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

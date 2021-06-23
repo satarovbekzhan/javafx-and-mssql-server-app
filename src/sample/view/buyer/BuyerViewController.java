@@ -116,10 +116,12 @@ public class BuyerViewController extends Controller {
             String description = selectedProduct.getDescription();
             if (description.length() > 365) descriptionText.setText(description.substring(0, 365) + "...");
             else descriptionText.setText(description);
-            ingredientsText.setText(selectedProduct.getIngredients());
+//            ingredientsText.setText(selectedProduct.getIngredients());
+            ingredientsText.setText("MAKK\"BURGERS\"TM");
             updateOrderAmountValueField();
-            // TODO: 6/22/2021 actual price of a product
-            productPriceLabel.setText("4.99" + " €");
+            DB.productRepo.getNewestPriceByProduct(product,
+                    result -> productPriceLabel.setText(result.getValue() + " €"),
+                    error -> productPriceLabel.setText("-.--" + " €"));
         }
         disOrEnableElementsListView();
     }
@@ -128,7 +130,7 @@ public class BuyerViewController extends Controller {
         DB.compositionRepo.getCompositionsByProductId(productId, result -> {
             addRowToNutrients("Nährstoffname", "Pro 100g", "Pro Portion");
             result.forEach(composition -> {
-                addRowToNutrients(composition.getNutrient() + " " + composition.getUnit(),
+                addRowToNutrients(composition.getNutrient().getName() + " " + composition.getUnit().getName(),
                         composition.getPro_100().toString(), composition.getPro_por().toString());
             });
         }, System.out::println);

@@ -26,7 +26,6 @@
                   <TextField fx:id="passwordTextField" />
                </children>
             </HBox>
-            <Separator prefWidth="200.0" />
             <Button mnemonicParsing="false" onAction="#updateNewUser" prefHeight="25.0" prefWidth="359.0" text="Benutzer ändern" />
          </children>
       </VBox>

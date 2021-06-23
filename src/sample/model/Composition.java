@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 
 public class Composition {
     private Integer id;
-    private String nutrient;
-    private String unit;
+    private Nutrient nutrient;
+    private Unit unit;
     private BigDecimal pro_100;
     private BigDecimal pro_por;
 
-    public Composition(Integer id, String nutrient, String unit, BigDecimal pro_100, BigDecimal pro_por) {
+    public Composition(Integer id, Nutrient nutrient, Unit unit, BigDecimal pro_100, BigDecimal pro_por) {
         this.id = id;
         this.nutrient = nutrient;
         this.unit = unit;
@@ -21,11 +21,11 @@ public class Composition {
         return id;
     }
 
-    public String getNutrient() {
+    public Nutrient getNutrient() {
         return nutrient;
     }
 
-    public String getUnit() {
+    public Unit getUnit() {
         return unit;
     }
 
@@ -35,5 +35,16 @@ public class Composition {
 
     public BigDecimal getPro_por() {
         return pro_por;
+    }
+
+    @Override
+    public String toString() {
+        return "Composition{" +
+                "id=" + id +
+                ", nutrient=" + nutrient +
+                ", unit=" + unit +
+                ", pro_100=" + pro_100 +
+                ", pro_por=" + pro_por +
+                '}';
     }
 }

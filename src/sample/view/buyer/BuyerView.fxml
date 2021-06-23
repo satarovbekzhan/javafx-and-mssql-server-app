@@ -72,7 +72,7 @@
                               <VBox fx:id="nutrientsVBox" maxWidth="-Infinity" prefHeight="0.0" prefWidth="455.0" spacing="10.0" styleClass="text-md">
 <!--                                 <HBox></HBox>-->
                               </VBox>
-                              <Text styleClass="txt-j, txt-b, text-md" text="Zutaten:" wrappingWidth="455.0" />
+<!--                              <Text styleClass="txt-j, txt-b, text-md" text="Zutaten:" wrappingWidth="455.0" />-->
                               <Text fx:id="ingredientsText" styleClass="text, text-md" text="Product Ingredients" wrappingWidth="455.0" />
                            </children>
                         </VBox>

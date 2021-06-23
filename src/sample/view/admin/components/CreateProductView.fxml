@@ -3,9 +3,74 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.admin.components.CreateProductViewController">
+<AnchorPane prefHeight="580.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.admin.components.CreateProductViewController">
    <children>
-      <Label layoutX="286.0" layoutY="183.0" text="product" />
+      <VBox prefHeight="540.0" prefWidth="400.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <Pane prefHeight="498.0" prefWidth="400.0">
+               <children>
+                  <ScrollPane prefHeight="495.0" prefWidth="415.0" style="-fx-background-color: transparent;">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="395.0">
+                           <children>
+                              <VBox prefHeight="495.0" prefWidth="395.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <TextField promptText="Produkttitel" />
+                                    <HBox prefHeight="21.0" prefWidth="395.0" spacing="20.0">
+                                       <children>
+                                          <TextField prefHeight="25.0" prefWidth="319.0" promptText="Produktbild-URL" />
+                                          <TextField promptText="Produktpreis (€)" />
+                                       </children>
+                                    </HBox>
+                                    <TextArea prefHeight="137.0" prefWidth="395.0" promptText="Produkt-Kurzbeschreibung" />
+                                    <Separator prefWidth="200.0" />
+                                    <VBox prefHeight="58.0" prefWidth="395.0" spacing="10.0">
+                                       <children>
+                                          <HBox prefHeight="17.0" prefWidth="395.0" spacing="20.0">
+                                             <children>
+                                                <Label prefHeight="17.0" prefWidth="136.0" text="Närwerte" />
+                                                <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="42.0" text="##" />
+                                                <Label alignment="CENTER" prefWidth="55.0" text="Pro 100g" />
+                                                <Label alignment="CENTER" prefWidth="55.0" text="Pro Por." />
+                                             </children>
+                                          </HBox>
+                                          <VBox prefHeight="0.0" prefWidth="395.0" spacing="10.0" />
+                                          <HBox layoutX="10.0" layoutY="65.0" prefHeight="25.0" prefWidth="395.0" spacing="20.0">
+                                             <children>
+                                                <ChoiceBox prefWidth="136.0" />
+                                                <ChoiceBox prefHeight="25.0" prefWidth="46.0" />
+                                                <TextField prefHeight="25.0" prefWidth="55.0" promptText="4.00" />
+                                                <TextField prefHeight="25.0" prefWidth="55.0" promptText="2.85" />
+                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" text="+" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <Separator prefWidth="200.0" />
+                                    <VBox prefHeight="117.0" prefWidth="395.0" spacing="10.0">
+                                       <children>
+                                          <Label prefHeight="17.0" prefWidth="397.0" text="Produkt-Kategorien" />
+                                          <VBox prefHeight="0.0" prefWidth="395.0" />
+                                          <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                             <children>
+                                                <ChoiceBox prefHeight="25.0" prefWidth="233.0" />
+                                                <Button mnemonicParsing="false" text="Zur Kategorie zuordnen" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </children></AnchorPane>
+                    </content>
+                  </ScrollPane>
+               </children></Pane>
+            <AnchorPane maxHeight="-Infinity" prefHeight="25.0" prefWidth="400.0">
+               <children>
+                  <Button layoutX="221.0" mnemonicParsing="false" onAction="#createProduct" prefHeight="25.0" prefWidth="179.0" text="Produkt erstellen" AnchorPane.rightAnchor="20.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

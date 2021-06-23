@@ -40,7 +40,7 @@ public class UpdateUserViewController extends AdminComponentController {
 
         if (newEmail.equals(user.getEmail()) && newPassword.equals(user.getPass()) &&
                 roleChoiceBox.getSelectionModel().getSelectedItem() == user.getRole()) {
-            new Alert(Alert.AlertType.WARNING, "Keine Änderungen vorgenommen!", ButtonType.OK).showAndWait();
+            new Alert(Alert.AlertType.WARNING, "Keine Änderungen vorgenommen! ", ButtonType.OK).showAndWait();
             getStage().close();
             return;
         }

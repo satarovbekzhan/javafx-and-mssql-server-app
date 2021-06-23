@@ -2,9 +2,10 @@ package sample.database;
 
 import sample.database.lamda.OnError;
 import sample.database.lamda.OnSucceed;
-import sample.model.Category;
+import sample.model.Price;
 import sample.model.Product;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -84,7 +85,39 @@ public class ProductRepo extends DB {
         }
     }
 
+    public void getProductByTitle(Product product, OnSucceed<Product> onSucceed, OnError onError) {
+        onSucceed.operate(product);
+    }
+
+    public void createProduct(Product product, OnSucceed<Product> onSucceed, OnError onError) {
+        onSucceed.operate(product);
+    }
+
+    public void updateProduct(Product product, OnSucceed<Product> onSucceed, OnError onError) {
+        onSucceed.operate(product);
+    }
+
     public void deleteProduct(Product product, OnSucceed<Product> onSucceed, OnError onError) {
         onSucceed.operate(product);
+    }
+
+    public void getNewestPriceByProduct(Product product, OnSucceed<Price> onSucceed, OnError onError) {
+        String sql = "SELECT [id], [product], [value], [starting]\n" +
+                "FROM [dbo].[price]\n" +
+                "WHERE starting IN (SELECT max(starting) FROM [dbo].[price] WHERE [product] = ?);";
+        try {
+            PreparedStatement stm = getConnection().prepareStatement(sql);
+            stm.setInt(1, product.getId());
+            ResultSet result = stm.executeQuery();
+            if (result.next()) {
+                Integer id = result.getInt("id");
+                Integer product_id = result.getInt("product");
+                BigDecimal value = result.getBigDecimal("value");
+                String starting = result.getString("starting");
+                onSucceed.operate(new Price(id, product_id, value, starting));
+            }
+        } catch (SQLException e) {
+            onError.operate(e.getMessage());
+        }
     }
 }

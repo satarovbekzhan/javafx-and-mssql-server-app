@@ -39,7 +39,7 @@ public class CreateUserViewController extends AdminComponentController {
         }
         DB.userRepo.createUser(new User(0, email, password, roleChoiceBox.getSelectionModel().getSelectedItem()),
                 result -> {
-                    new Alert(Alert.AlertType.WARNING, "Geschafft!", ButtonType.OK).showAndWait();
+                    new Alert(Alert.AlertType.WARNING, "Geschafft! ", ButtonType.OK).showAndWait();
                     getObjectObservableList().add(result);
                     getStage().close();
                 }, error -> new Alert(Alert.AlertType.ERROR, error, ButtonType.OK).showAndWait());

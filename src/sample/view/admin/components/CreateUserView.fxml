@@ -3,9 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="223.0" prefWidth="403.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.admin.components.CreateUserViewController">
+<AnchorPane prefHeight="195.0" prefWidth="403.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.admin.components.CreateUserViewController">
    <children>
-      <VBox prefHeight="183.0" prefWidth="355.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <VBox prefHeight="164.0" prefWidth="363.0" spacing="20.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
             <HBox prefHeight="4.0" prefWidth="470.0" spacing="20.0">
                <children>
@@ -25,7 +25,6 @@
                   <TextField fx:id="passwordTextField" promptText="password" />
                </children>
             </HBox>
-            <Separator prefWidth="200.0" />
             <Button mnemonicParsing="false" onAction="#createNewUser" prefHeight="25.0" prefWidth="359.0" text="Benutzer erstellen" />
          </children>
       </VBox>
