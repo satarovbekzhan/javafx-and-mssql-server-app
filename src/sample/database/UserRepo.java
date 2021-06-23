@@ -107,7 +107,7 @@ public class UserRepo extends DB {
             PreparedStatement stm = getConnection().prepareStatement(sql);
             stm.setString(1, email);
             ResultSet result = stm.executeQuery();
-            while (result.next()) {
+            if (result.next()) {
                 Integer userId = result.getInt("id");
                 String userEmail = result.getString("email");
                 String userPassword = result.getString("pass");
@@ -119,9 +119,7 @@ public class UserRepo extends DB {
                         break;
                     case "BUYER": userRole = Role.BUYER;
                 }
-                System.out.println("User found by email " + userId + " " + userEmail);
                 onSucceed.operate(new User(userId, userEmail, userPassword, userRole));
-                break;
             }
         } catch (SQLException e) {
             onError.operate(e.getMessage());

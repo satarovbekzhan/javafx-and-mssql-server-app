@@ -32,7 +32,7 @@ public abstract class DB {
 
         // Create an instance of a TestRepo and try to get connection
         testRepo = new TestRepo(connUrl);
-        testRepo.getLoginData();
+        testRepo.getUserRole();
 
         // Instantiate other database repositories
         userRepo = new UserRepo(connUrl);

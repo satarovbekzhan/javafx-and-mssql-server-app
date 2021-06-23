@@ -3,9 +3,32 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.admin.components.UpdateUserViewController">
+<AnchorPane prefHeight="223.0" prefWidth="403.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.admin.components.UpdateUserViewController">
    <children>
-      <Label layoutX="272.0" layoutY="183.0" text="update user" />
+      <VBox prefHeight="183.0" prefWidth="355.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <Label fx:id="idLabel" prefHeight="25.0" text="###" />
+            <HBox prefHeight="4.0" prefWidth="470.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="185.0" text="Wählen Sie eine Rolle Benutzers" />
+                  <ChoiceBox fx:id="roleChoiceBox" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="4.0" prefWidth="470.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="185.0" text="Neuen Benutzernamen erstellen" />
+                  <TextField fx:id="emailTextField" />
+               </children>
+            </HBox>
+            <HBox prefHeight="28.0" prefWidth="470.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="185.0" text="Erstellen Sie ein sicheres Passwort" />
+                  <TextField fx:id="passwordTextField" />
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <Button mnemonicParsing="false" onAction="#updateNewUser" prefHeight="25.0" prefWidth="359.0" text="Benutzer ändern" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

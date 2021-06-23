@@ -21,7 +21,10 @@ import sample.view.admin.components.UpdateCategoryViewController;
 import sample.view.admin.components.UpdateProductViewController;
 import sample.view.admin.components.UpdateUserViewController;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminViewController extends Controller {
 
@@ -38,10 +41,10 @@ public class AdminViewController extends Controller {
     @FXML
     private Button deleteButton;
 
-    private ObservableList<Object> objectsList = FXCollections.observableArrayList();
+    private final ObservableList<Object> objectsList = FXCollections.observableArrayList();
     private Class currentWorkingClass = null;
     private int offset = 0;
-    private int limit = 17;
+    private final int limit = 17;
 
     @FXML
     public void initialize() {
@@ -193,6 +196,7 @@ public class AdminViewController extends Controller {
             AdminComponentController acc = loader.getController();
             acc.setObjectObservableList(objectsList);
             Stage stage = new Stage();
+            acc.setStage(stage);
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(getStage());
             if (currentWorkingClass.equals(User.class))
@@ -239,6 +243,7 @@ public class AdminViewController extends Controller {
                 windowTitle = "Änderung eines Produkts mit der ID " + ((Product) o).getId();
             }
             Stage stage = new Stage();
+            acc.setStage(stage);
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(getStage());
             stage.setTitle(windowTitle);

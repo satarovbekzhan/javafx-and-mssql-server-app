@@ -10,11 +10,11 @@ public class TestRepo extends DB {
         super(url);
     }
 
-    public String getLoginData() throws SQLException {
-        String sql = "EXEC pr_loginData;";
+    public String getUserRole() throws SQLException {
+        String sql = "EXEC pr_user_role;";
         PreparedStatement stm = getConnection().prepareStatement(sql);
         ResultSet result = stm.executeQuery();
-        while (result.next()) {
+        if (result.next()) {
             return result.getString("");
         }
         return "";

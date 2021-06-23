@@ -85,7 +85,7 @@ public class LoginViewController {
         // makk_user | 123
         try {
             DB.initializeDatabaseModels(emailTextField.getText(), passwordTextField.getText());
-            authUserRole = DB.testRepo.getLoginData();
+            authUserRole = DB.testRepo.getUserRole();
             if (!(authUserRole.equals("ADMIN") || authUserRole.equals("STAFF") || authUserRole.equals("BUYER")))
                 return "You do not have any role to access the system!";
         } catch (SQLException throwable) {
