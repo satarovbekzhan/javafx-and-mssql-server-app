@@ -33,8 +33,8 @@ public class LoginViewController {
 
 //        emailTextField.setText("admin");
 //        passwordTextField.setText("admin");
-        emailTextField.setText("bekzhan");
-        passwordTextField.setText("1304");
+        emailTextField.setText("mila");
+        passwordTextField.setText("111");
 
         info("Authorization required! Give your credentials to get an access.", null);
     }
@@ -83,8 +83,6 @@ public class LoginViewController {
     }
 
     private String authorize() throws InterruptedException {
-        // TODO: 6/6/2021 Extra check for user credentials and its roles
-        // makk_user | 123
         try {
             DB.initializeDatabaseModels(emailTextField.getText(), passwordTextField.getText());
             authUserRole = DB.testRepo.getUserRole();

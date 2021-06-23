@@ -113,7 +113,7 @@ public class CartViewController {
                 DB.orderRepo.addItemToOrder(orderId, p_id, amount, result -> {}, System.out::println);
                 it.remove();
             }
-            new Alert(Alert.AlertType.INFORMATION, "Vielen Dank für Ihre Bestellung", ButtonType.OK).showAndWait();
+            new Alert(Alert.AlertType.INFORMATION, "Vielen Dank für Ihre Bestellung!", ButtonType.OK).showAndWait();
             orderButton.setDisable(false);
             renderCartItems();
         }, error -> new Alert(Alert.AlertType.ERROR, error, ButtonType.OK).showAndWait());

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="560.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.staff.OrderDetailsViewController">
+   <children>
+      <VBox prefHeight="520.0" prefWidth="520.0" spacing="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <ListView fx:id="itemListView" prefHeight="483.0" prefWidth="520.0" />
+            <BorderPane prefHeight="25.0" prefWidth="200.0">
+               <left>
+                  <Label fx:id="priceLabel" prefHeight="25.0" text="Label" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <HBox prefHeight="25.0" prefWidth="365.0" spacing="20.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <ChoiceBox fx:id="statusChoiceBox" prefHeight="25.0" prefWidth="254.0" />
+                        <Button mnemonicParsing="false" onAction="#updateOrderStatus" prefHeight="25.0" prefWidth="102.0" text=" Set Staus" />
+                     </children>
+                  </HBox>
+               </right>
+            </BorderPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

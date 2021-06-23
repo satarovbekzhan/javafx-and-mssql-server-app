@@ -1,12 +1,14 @@
 package sample.model;
 
+import java.util.Date;
+
 public class Order {
     private Integer id;
     private Status status;
     private String user;
-    private String ordered;
+    private Date ordered;
 
-    public Order(Integer id, Status status, String user, String ordered) {
+    public Order(Integer id, Status status, String user, Date ordered) {
         this.id = id;
         this.status = status;
         this.user = user;
@@ -25,7 +27,7 @@ public class Order {
         return user;
     }
 
-    public String getOrdered() {
+    public Date getOrdered() {
         return ordered;
     }
 

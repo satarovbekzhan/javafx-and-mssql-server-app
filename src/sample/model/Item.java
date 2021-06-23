@@ -2,11 +2,11 @@ package sample.model;
 
 public class Item {
     private Integer id;
-    private Order order;
+    private Integer order;
     private Product product;
     private Integer amount;
 
-    public Item(Integer id, Order order, Product product, Integer amount) {
+    public Item(Integer id, Integer order, Product product, Integer amount) {
         this.id = id;
         this.order = order;
         this.product = product;
@@ -17,7 +17,7 @@ public class Item {
         return id;
     }
 
-    public Order getOrder() {
+    public Integer getOrder() {
         return order;
     }
 
@@ -34,7 +34,7 @@ public class Item {
         return "Item{" +
                 "id=" + id +
                 ", order=" + order +
-                ", product=" + product +
+                ", product='" + product + '\'' +
                 ", amount=" + amount +
                 '}';
     }
