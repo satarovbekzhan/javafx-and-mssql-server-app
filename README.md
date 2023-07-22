@@ -1,4 +1,4 @@
-# MAKK
+# JavaFX & MS SQL Server Project
 
 > "Datenbanken II" Module project. MAKK is an 
 > order-taking system of a fast-food joint. With 
